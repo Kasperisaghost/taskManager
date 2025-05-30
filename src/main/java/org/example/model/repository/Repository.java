@@ -9,7 +9,7 @@ import java.util.UUID;
 
 public interface Repository {
 
-    Set<Sticker> getStickers();
+    List<Sticker> getStickers();
     List<Task> getTasksById(Sticker sticker);
 
     void addTask(Sticker sticker, Task task);
@@ -17,4 +17,5 @@ public interface Repository {
 
     void deleteTask(Sticker sticker, Task task);
     void deleteSticker(Sticker sticker);
+
 }

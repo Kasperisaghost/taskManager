@@ -1,6 +1,6 @@
 package org.example.model.exeptions;
 
-public class ObjectNotFound extends Exception{
+public class ObjectNotFound extends Exception {
     private Class<?> objectType;
     private String msg;
 
@@ -11,6 +11,6 @@ public class ObjectNotFound extends Exception{
 
     @Override
     public String toString() {
-        return "This type of object not found: -> " + objectType;
+        return msg + " -> " + objectType;
     }
 }

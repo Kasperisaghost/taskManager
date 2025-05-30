@@ -14,13 +14,13 @@ public class GlobalRepository implements Repository {
 
 
     @Override
-    public Set<Sticker> getStickers() {
-        return data.keySet();
+    public List<Sticker> getStickers() {
+        return List.copyOf(data.keySet());
     }
 
     @Override
     public List<Task> getTasksById(Sticker sticker) {
-        return data.get(sticker);
+        return Collections.unmodifiableList(data.get(sticker));
     }
 
     @Override
@@ -45,6 +45,5 @@ public class GlobalRepository implements Repository {
     public void deleteSticker(Sticker sticker) {
         data.remove(sticker);
     }
-
 
 }
