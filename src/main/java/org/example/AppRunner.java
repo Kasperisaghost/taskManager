@@ -1,13 +1,13 @@
 package org.example;
 
-import org.example.controller.store_manager.InMemoryManager;
+import org.example.controller.store_manager.GlobalManager;
 import org.example.controller.store_manager.Manager;
 import org.example.model.enums.TypeStore;
 import org.example.model.exeptions.BellowZero;
 import org.example.model.exeptions.ObjectNotFound;
 import org.example.model.history_manager.HistoryManager;
 import org.example.model.history_manager.InMemoryHistoryManager;
-import org.example.model.repository.GlobalRepository;
+import org.example.model.repository.InMemoryRepository;
 import org.example.model.repository.Repository;
 import org.example.serviseces.StickerService;
 import org.example.serviseces.StickerServiceInterface;
@@ -29,7 +29,7 @@ public class AppRunner {
 
         StickerServiceInterface stickerServiceInterface = new StickerService(repository, historyManager);
         TaskServiceInterface taskServiceInterface = new TaskService(repository, historyManager);
-        Manager manager = new InMemoryManager(taskServiceInterface, stickerServiceInterface);
+        Manager manager = new GlobalManager(taskServiceInterface, stickerServiceInterface);
 
         while (true) {
             System.out.println("Enter a function!(Enter by digit)");
@@ -39,9 +39,10 @@ public class AppRunner {
                     "4. Delete sticker.\n" +
                     "5. Delete task.\n" +
                     "6. Change task status.\n" +
+                    "7. Show history.\n" +
                     "0. Exit");
 
-            int userDigit = getValidUserInt(7);
+            int userDigit = getValidUserInt(8);
 
             try {
                 switch (userDigit) {
@@ -105,6 +106,11 @@ public class AppRunner {
                         continue;
                     }
 
+                    case 7: {
+                        System.out.println("History");
+                        historyManager.showAll();
+                    }
+
                 }
             } catch (ObjectNotFound ob) {
                 System.out.println(ob + "\n");
@@ -155,10 +161,10 @@ public class AppRunner {
 
     private static Repository getRepositoryByType(TypeStore typeStore) {
         return switch (typeStore) {
-            case IN_MEMORY -> new GlobalRepository();
+            case IN_MEMORY -> new InMemoryRepository();
             //case IN_FILE ->
             //case IN_DATABASE ->
-            default -> new GlobalRepository();
+            default -> new InMemoryRepository();
         };
     }
 

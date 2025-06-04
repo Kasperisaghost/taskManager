@@ -36,10 +36,9 @@ public final class Sticker extends Entity {
 
     @Override
     public String toString() {
-        return "-> -> -> Sticker{" + "\n" +
-                "id= " + super.getId() + "\n" +
-                "title= " + super.getTitle() + "\n" +
-                "status= " + status +
-                '}' + "\n";
+        return "Sticker" + "\n" +
+                " id = " + super.getId() + "\n" +
+                " title = " + super.getTitle() + "\n" +
+                " status = " + status;
     }
 }

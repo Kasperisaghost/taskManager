@@ -41,7 +41,6 @@ public final class Task extends Entity {
                 + "\nTask name: "
                 + super.getTitle()
                 + "\nID: "
-                + super.getId()
-                + "\n";
+                + super.getId();
     }
 }

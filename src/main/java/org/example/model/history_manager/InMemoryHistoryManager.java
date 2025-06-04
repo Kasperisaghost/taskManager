@@ -1,5 +1,6 @@
 package org.example.model.history_manager;
 
+import org.example.Main;
 import org.example.model.models.Entity;
 
 import java.util.ArrayList;
@@ -26,7 +27,15 @@ public class InMemoryHistoryManager implements HistoryManager{
 
     @Override
     public void showAll() {
-        int firstElement = Math.max(history.size() - HistoryManager.MAX_LIST_LENGTH, 0);
-        IntStream.rangeClosed(firstElement, firstElement+10).mapToObj(x -> history.get(x)).forEach(System.out::println);
+        int firstIndexElement = Math.max(history.size() - HistoryManager.MAX_LIST_LENGTH, 0);
+        int counter = 0;
+        for (; ; firstIndexElement++) {
+            if (firstIndexElement == history.size()) return;
+            if (counter == 10) return;
+            System.out.println(history.get(firstIndexElement));
+            counter++;
+        }
+
+
     }
 }

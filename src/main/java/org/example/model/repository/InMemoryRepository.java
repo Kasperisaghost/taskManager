@@ -5,10 +5,10 @@ import org.example.model.models.Task;
 
 import java.util.*;
 
-public class GlobalRepository implements Repository {
+public class InMemoryRepository implements Repository {
     private Map<Sticker, List<Task>> data;
 
-    public GlobalRepository() {
+    public InMemoryRepository() {
         this.data = new HashMap<>();
     }
 

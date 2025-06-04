@@ -12,12 +12,12 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
-public class InMemoryManager implements Manager {
+public class GlobalManager implements Manager {
 
     private final TaskServiceInterface taskServiceInterface;
     private final StickerServiceInterface stickerServiceInterface;
 
-    public InMemoryManager(TaskServiceInterface taskServiceInterface, StickerServiceInterface stickerServiceInterface) {
+    public GlobalManager(TaskServiceInterface taskServiceInterface, StickerServiceInterface stickerServiceInterface) {
         this.stickerServiceInterface = stickerServiceInterface;
         this.taskServiceInterface = taskServiceInterface;
     }
