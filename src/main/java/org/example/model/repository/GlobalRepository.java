@@ -6,12 +6,16 @@ import org.example.model.models.Task;
 import java.util.*;
 
 public class GlobalRepository implements Repository {
+    private static final GlobalRepository INSTANCE = new GlobalRepository();
     private Map<Sticker, List<Task>> data;
 
-    public GlobalRepository() {
+    private GlobalRepository() {
         this.data = new HashMap<>();
     }
 
+    public static GlobalRepository getINSTANCE() {
+        return INSTANCE;
+    }
 
     @Override
     public List<Sticker> getStickers() {

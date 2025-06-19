@@ -14,6 +14,14 @@ public final class Sticker extends Entity {
         this.status = StickerStatus.TO_DO;
     }
 
+    public Sticker(String name, UUID id, StickerStatus stickerStatus) {
+        super(name, id);
+        this.status = stickerStatus;
+    }
+
+    public StickerStatus getStatus() {
+        return status;
+    }
 
     public void changeStatus(StickerStatus stickerStatus) {
         status = stickerStatus;

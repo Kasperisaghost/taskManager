@@ -13,6 +13,11 @@ public final class Task extends Entity {
         this.status = TaskStatus.IN_PROGRESS;
     }
 
+    public Task(String task, UUID id, TaskStatus taskStatus) {
+        super(task, id);
+        this.status = taskStatus;
+    }
+
     public TaskStatus getStatus() {
         return status;
     }
