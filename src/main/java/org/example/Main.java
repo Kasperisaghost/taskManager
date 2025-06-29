@@ -8,21 +8,23 @@ import org.example.model.repository.PostgressRepository;
 import org.example.model.repository.Repository;
 import org.example.utils.*;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import javax.sound.midi.Soundbank;
+import java.sql.*;
 import java.time.*;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
-    public static void main(String[] args) throws ObjectNotFound {
+    public static void main(String[] args) throws ObjectNotFound, SQLException {
         //AppRunner.run();
-        Repository repository = PostgressRepository.getInstance();
-        Sticker sticker = new Sticker("so",
-                UUID.fromString("9b922d23-ad0b-4633-afe0-d28f6549a802"));
-        repository.getTasksById(sticker).forEach(System.out::println);
+        double value = 12 / 3.5;
+        System.out.println("va" + 2);
+        Soundbank
+
+
+
+
     }
 }

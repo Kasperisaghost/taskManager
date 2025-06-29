@@ -10,7 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 
 public class PostgressRepository implements Repository {
@@ -22,13 +21,15 @@ public class PostgressRepository implements Repository {
 
     @Override
     public List<Sticker> getStickers() {
-        String sqlQuerry = """
+        String sqlQuery = """
                 SELECT * FROM stickers;
                 """;
 
         List<Sticker> data = new ArrayList<>();
 
-        try (var prepStatement = DataBaseConnector.connection().prepareStatement(sqlQuerry)) {
+        try (var connection = DataBaseConnector.getConnection();
+             var prepStatement = connection.prepareStatement(sqlQuery)) {
+
             ResultSet result = prepStatement.executeQuery();
             while (result.next()) {
                 Sticker sticker = new Sticker(
@@ -53,7 +54,9 @@ public class PostgressRepository implements Repository {
 
         List<Task> data = new ArrayList<>();
 
-        try (var prepStatement = DataBaseConnector.connection().prepareStatement(sqlQuery)) {
+        try (var connection = DataBaseConnector.getConnection();
+                var prepStatement = connection.prepareStatement(sqlQuery)) {
+
             prepStatement.setString(1, sticker.getId().toString());
             var result = prepStatement.executeQuery();
             while (result.next()) {
@@ -77,7 +80,9 @@ public class PostgressRepository implements Repository {
         String sqlQuery = """
                 INSERT INTO tasks (sticker_uuid, title, task_uuid, status) VALUES (?, ?, ?, ?);
                 """;
-        try (var prepStatement = DataBaseConnector.connection().prepareStatement(sqlQuery)) {
+        try (var connection = DataBaseConnector.getConnection();
+             var prepStatement = connection.prepareStatement(sqlQuery)) {
+
             prepStatement.setString(1, sticker.getId().toString());
             prepStatement.setString(2, task.getTitle());
             prepStatement.setString(3, task.getId().toString());
@@ -95,7 +100,9 @@ public class PostgressRepository implements Repository {
         String sqlQuery = """
                 INSERT INTO stickers (uuid, title, status) VALUES (?, ?, ?);
                 """;
-        try (var prepStatement = DataBaseConnector.connection().prepareStatement(sqlQuery)) {
+        try (var connection = DataBaseConnector.getConnection();
+             var prepStatement = connection.prepareStatement(sqlQuery)) {
+
             prepStatement.setString(1, sticker.getId().toString());
             prepStatement.setString(2, sticker.getTitle());
             prepStatement.setString(3, sticker.getStatus().toString());
@@ -112,7 +119,9 @@ public class PostgressRepository implements Repository {
         String sqlQuery = """
                 DELETE FROM tasks WHERE sticker_uuid = ? AND task_uuid = ?;
                 """;
-        try (var prepStatement = DataBaseConnector.connection().prepareStatement(sqlQuery)) {
+        try (var connection = DataBaseConnector.getConnection();
+             var prepStatement = connection.prepareStatement(sqlQuery)) {
+
             prepStatement.setString(1, sticker.getId().toString());
             prepStatement.setString(2, task.getId().toString());
             System.out.println(prepStatement.executeUpdate());
@@ -126,7 +135,9 @@ public class PostgressRepository implements Repository {
         String sqlQuery = """
                 DELETE FROM stickers WHERE uuid = ?;
                 """;
-        try (var prepStatement = DataBaseConnector.connection().prepareStatement(sqlQuery)) {
+        try (var connection = DataBaseConnector.getConnection();
+             var prepStatement = connection.prepareStatement(sqlQuery)) {
+
             prepStatement.setString(1, sticker.getId().toString());
             System.out.println(prepStatement.executeUpdate());
 

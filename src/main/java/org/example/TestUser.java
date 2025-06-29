@@ -1,22 +1,15 @@
 package org.example;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Logger;
+
 public class TestUser {
-    {
-        System.out.println("Empty Block");
-    }
+    private final Map<String, Integer> INSTANCE = new HashMap<>();
 
-    static {
-        System.out.println("Statick block");
-        Inner.fromInner();
-    }
+    private TestUser() {}
 
-    public TestUser() {
-        System.out.println("Basick consructor");
-    }
-
-    class Inner {
-        private static void fromInner() {
-            System.out.println("Call from inner!");
-        }
+    public Map<String, Integer> getINSTANCE() {
+        return INSTANCE;
     }
 }
